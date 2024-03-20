@@ -1,0 +1,20 @@
+﻿version: '3.4'
+
+services:
+  ui:
+    image: restdemo/ui
+    environment:
+      - WeatherServiceURL=http://api:8080
+      - RandomMessage="Hello, World"
+    build:
+      dockerfile: Dockerfile-ui
+    ports:
+      - "8100:8080"
+    depends_on:
+      - api
+  api:
+    image: restdemo/service
+    build:
+      dockerfile: Dockerfile-api
+    ports:
+        - "8200:8080"
